@@ -4,119 +4,107 @@ Tema: Sistemi për Menaxhimin e Porosive Online (E-Commerce)
 
 ## Raporti 1
 
-### Ideja
+Ideja është të bëhet një sistem për menaxhimin e porosive online, në mënyrë që klientët të shohin produktet dhe të bëjnë porosi më lehtë, ndërsa administratori t'i menaxhojë produktet dhe porositë në një vend të vetëm, pa gabime dhe pa porosi të humbura.
 
-Ideja është të ndërtohet një aplikacion web për menaxhimin e porosive online, ku klientët mund të shfletojnë produktet, t'i shtojnë në shportë dhe të bëjnë porosi, ndërsa administratorët mund të menaxhojnë produktet, stokun dhe statusin e porosive në mënyrë të qartë dhe të sigurt.
+## Kërkesat
 
-Problemi që zgjidhet: shumë biznese të vogla i pranojnë porositë manualisht (telefon, rrjete sociale, Excel), gjë që sjell gabime, porosi të humbura dhe stok të pasaktë. Ky sistem i centralizon të gjitha në një vend.
+Kërkesat për këtë sistem janë:
 
-### Përdoruesit (rolet)
+- sistemi duhet të lejojë qasjen e klientëve dhe të administratorit
 
-- **Klienti**: regjistrohet, shfleton produktet, bën porosi dhe e ndjek statusin.
-- **Administratori**: menaxhon produktet, kategoritë dhe porositë.
+- klienti mund të regjistrohet dhe të hyjë me email dhe fjalëkalim
 
-### Kërkesat funksionale
+- klienti mund t'i shohë produktet dhe t'i kërkojë ose filtrojë sipas kategorisë dhe çmimit
 
-- KF01: Përdoruesi mund të regjistrohet dhe të hyjë (login) me email dhe fjalëkalim.
-- KF02: Klienti mund t'i shfletojë produktet, të kërkojë dhe t'i filtrojë sipas kategorisë dhe çmimit.
-- KF03: Klienti mund t'i shohë detajet e një produkti (përshkrimi, çmimi, stoku).
-- KF04: Klienti mund të shtojë, heqë dhe ndryshojë sasinë e produkteve në shportë.
-- KF05: Klienti mund ta konfirmojë porosinë duke zgjedhur adresën e dërgesës dhe mënyrën e pagesës (pagesë në dorëzim).
-- KF06: Klienti mund ta shohë historikun e porosive dhe statusin e secilës.
-- KF07: Klienti mund ta anulojë porosinë vetëm derisa ajo është në statusin "PENDING".
-- KF08: Administratori mund të krijojë, ndryshojë dhe fshijë produkte dhe kategori.
-- KF09: Administratori mund t'i shohë të gjitha porositë dhe ta ndryshojë statusin (PENDING → CONFIRMED → SHIPPED → DELIVERED ose CANCELLED).
-- KF10: Stoku zvogëlohet automatikisht pas porosisë; porosia refuzohet nëse nuk ka stok të mjaftueshëm.
-- KF11: Administratori ka një dashboard me statistika bazë (numri i porosive, shitjet totale, produktet me stok të ulët).
+- klienti mund të shohë detajet e produktit (përshkrimi, çmimi dhe sa copë ka në stok)
 
-### Kërkesat jofunksionale
+- klienti mund të shtojë produkte në shportë, t'i heqë ato ose t'ia ndryshojë sasinë
 
-- Fjalëkalimet ruhen vetëm në formë të hash-uar.
-- Endpoint-et private kërkojnë autentikim, ndërsa autorizimi sipas rolit bëhet në backend.
-- Input-i validohet para se të ruhet në databazë.
-- Çdo përdorues, produkt dhe porosi ka ID unike.
-- Aplikacioni është responsiv dhe i përdorshëm edhe në ekran mobil.
-- Secrets dhe çelësat (p.sh. `.env`) nuk ngarkohen në repository.
-- Gabimet kthehen në format të kontrolluar me status code të duhur.
+- klienti mund ta bëjë porosinë duke shkruar adresën e dërgesës, ku pagesa bëhet kur e merr porosinë
 
-### Teknologjitë dhe arkitektura
+- klienti mund ta shohë historikun e porosive dhe në çfarë statusi janë
 
-| Shtresa | Teknologjia | Arsyeja |
-|---|---|---|
-| Frontend | HTML, CSS, JavaScript, Bootstrap | Të njohura, responsive me shpejtësi |
-| Backend | PHP (REST API), sesione (session) | Gjuhë që e njoh dhe e ruan lehtë lidhjen me MySQL |
-| Databaza | MySQL | Relacionale, ideale për porosi dhe relacione |
-| Mjete | Git/GitHub, XAMPP, phpMyAdmin, Postman, VS Code | Server lokal, menaxhim i databazës dhe testim i API-ve |
+- klienti mund ta anulojë porosinë vetëm derisa ajo nuk është konfirmuar ende nga admini
 
-Arkitektura është monolitike me tre shtresa (frontend, backend, databazë), me module të ndara sipas funksionalitetit:
+- administratori mund të shtojë, ndryshojë dhe fshijë produkte dhe kategori
 
-```mermaid
-flowchart TD
-    A[Frontend: HTML / CSS / JS / Bootstrap] -->|HTTPS / REST API| B[Backend: PHP]
-    B --> C[(Databaza: MySQL)]
-```
+- administratori mund t'i shohë të gjitha porositë dhe ta ndryshojë statusin e tyre (në pritje, konfirmuar, dërguar, dorëzuar ose anuluar)
 
-**Modulet:** Autentikimi dhe përdoruesit, Produktet dhe kategoritë, Shporta, Porositë, Pagesat, Administrimi.
+- kur bëhet një porosi, stoku i produktit zvogëlohet vetë, dhe nëse nuk ka mjaftueshëm produkte porosia nuk pranohet
 
-### Modeli fillestar i databazës
+...
+
+- në website duhet të konfirmohet regjistrimi, pra autentifikim
+
+- fjalëkalimet duhet të ruhen me hash (të fshehura, jo si tekst i lexueshëm)
+
+- çdo përdorues, produkt dhe porosi duhet të ketë ID të veçantë
+
+- website duhet të jetë responsiv për çdo lloj ekrani
+
+- duhet të jetë i lehtë për t'u kuptuar dhe për t'u përdorur
+
+- secili rol (klient ose administrator) duhet të bëjë vetëm funksionet e veta
+
+## Teknikat/arkitektura
+
+frontend
+
+HTML, CSS, JavaScript, Bootstrap
+
+faqet e klientit dhe të administratorit, dizajn responsiv
+
+backend
+
+PHP (me XAMPP): hyrja dhe regjistrimi, rolet, produktet, shporta dhe porositë
+
+database
+
+MySQL: përdoruesit, produktet, kategoritë, shporta, porositë dhe pagesat
+
+Modeli fillestar i databazës:
 
 | Tabela | Për çfarë shërben |
 |---|---|
-| users | Llogaritë: emri, email-i (unik), password hash dhe roli |
+| users | Llogaritë, email-i, password hash dhe roli (klient ose administrator) |
 | addresses | Adresat e dërgesës të klientit |
 | categories | Kategoritë e produkteve |
-| products | Produktet: çmimi, stoku, kategoria |
-| cart_items | Produktet në shportën e secilit klient |
-| orders | Porositë: klienti, adresa, statusi, totali |
-| order_items | Produktet brenda një porosie (sasia dhe çmimi në momentin e blerjes) |
-| payments | Pagesa e porosisë: mënyra dhe statusi |
+| products | Produktet me çmim, stok dhe kategori |
+| cart_items | Produktet që klienti i ka në shportë |
+| orders | Porositë me klientin, adresën, statusin dhe totalin |
+| order_items | Produktet brenda një porosie, me sasinë dhe çmimin |
+| payments | Pagesa e secilës porosi |
 
-Relacionet kryesore:
+Lidhjet kryesore midis tabelave:
 
-- `users` 1 → N `addresses`, `orders`, `cart_items`
-- `categories` 1 → N `products`
-- `orders` 1 → N `order_items`
-- `products` 1 → N `order_items` (kështu `orders` dhe `products` lidhen many-to-many përmes `order_items`)
-- `orders` 1 → 1 `payments`
+- një përdorues mund të ketë shumë porosi
+- një kategori ka shumë produkte
+- një porosi ka shumë produkte brenda (tabela order_items)
+- një porosi ka një pagesë
 
-```mermaid
-erDiagram
-    USERS ||--o{ ADDRESSES : has
-    USERS ||--o{ ORDERS : places
-    USERS ||--o{ CART_ITEMS : has
-    CATEGORIES ||--o{ PRODUCTS : contains
-    PRODUCTS ||--o{ CART_ITEMS : in
-    ORDERS ||--|{ ORDER_ITEMS : includes
-    PRODUCTS ||--o{ ORDER_ITEMS : sold_as
-    ORDERS ||--|| PAYMENTS : paid_by
-    ADDRESSES ||--o{ ORDERS : ships_to
-```
+arkitektura
 
-### Endpoint-et kryesore të planifikuara
+sistemi ndahet në tri pjesë: frontend (çfarë e shohin përdoruesit), backend (PHP, që i përpunon kërkesat) dhe database (MySQL, ku ruhen të dhënat)
 
-| Method | Endpoint | Qëllimi |
+Modulet: përdoruesit, produktet, shporta, porositë, pagesat, administrimi
+
+## Plan pune
+
+sugjerimi: kërkesat -> dizajnimi -> implementimi -> testimi
+
+| Faza | Aktivitetet kryesore | Rezultati i pritshëm |
 |---|---|---|
-| POST | /api/auth/register | Regjistrimi i përdoruesit |
-| POST | /api/auth/login | Autentikimi |
-| GET | /api/products | Lista e produkteve (me filtra) |
-| POST | /api/products | Krijon produkt (vetëm admin) |
-| POST | /api/cart | Shton produkt në shportë |
-| POST | /api/orders | Krijon porosi nga shporta |
-| GET | /api/orders | Porositë e përdoruesit |
-| PATCH | /api/orders/:id/status | Ndryshon statusin (vetëm admin) |
+| Analiza e kërkesave | Përcaktimi i funksioneve dhe roleve të sistemit | Lista e kërkesave |
+| Dizajnimi | Arkitektura dhe modeli i databazës | Dizajni i sistemit |
+| Krijimi i databazës | Krijimi i tabelave dhe lidhjeve në MySQL | Databaza e gatshme |
+| Backend-i | Hyrja, regjistrimi, produktet, shporta dhe porositë në PHP | Pjesa e serverit funksionale |
+| Frontend-i | Faqet për klientin dhe administratorin | Ndërfaqe responsive |
+| Testimi | Provimi i funksioneve dhe rregullimi i gabimeve | Version i testuar |
 
-### Plan pune
+Orari i propozuar
 
-Kërkesat → Dizajnimi → Implementimi → Testimi → Deployment
-
-| Raporti | Fokusi | Rezultati i pritshëm |
-|---|---|---|
-| Raporti 1 | Analiza, kërkesat, dizajni teknik | Repository, arkitektura, modeli i databazës, plan pune |
-| Raporti 2 | Databaza, backend dhe API | Databaza reale, autentikimi, endpoint-et kryesore, testim me Postman |
-| Raporti 3 | Frontend dhe integrimi | Katalogu, shporta dhe porosia nga UI deri në databazë |
-| Raporti 4 | Testim, siguri, deployment | Test cases, kontrolle sigurie, version beta i deploy-uar |
-| Final | Mbrojtja teknike | Live demo, kodi, Git history, dokumentimi |
-
-### Jashtë scope-it të këtij semestri
-
-Pagesa online me kartelë, integrimi me kurier real, kuponat dhe zbritjet, vlerësimet e produkteve.
+Java 1: analiza e kërkesave, dizajni dhe databaza
+Java 2-3: backend-i (hyrja, produktet, shporta, porositë)
+Java 4-5: frontend-i dhe lidhja me backend-in
+Java 6-7: testimi dhe rregullimi i gabimeve
+Java 8: finalizimi
