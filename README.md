@@ -44,15 +44,15 @@ Problemi që zgjidhet: shumë biznese të vogla i pranojnë porositë manualisht
 | Shtresa | Teknologjia | Arsyeja |
 |---|---|---|
 | Frontend | HTML, CSS, JavaScript, Bootstrap | Të njohura, responsive me shpejtësi |
-| Backend | Node.js (Express), REST API, JWT | Një gjuhë (JavaScript) në të dy anët |
+| Backend | PHP (REST API), sesione (session) | Gjuhë që e njoh dhe e ruan lehtë lidhjen me MySQL |
 | Databaza | MySQL | Relacionale, ideale për porosi dhe relacione |
-| Mjete | Git/GitHub, Postman, VS Code | Versionim dhe testim i API-ve |
+| Mjete | Git/GitHub, XAMPP, phpMyAdmin, Postman, VS Code | Server lokal, menaxhim i databazës dhe testim i API-ve |
 
 Arkitektura është monolitike me tre shtresa (frontend, backend, databazë), me module të ndara sipas funksionalitetit:
 
 ```mermaid
 flowchart TD
-    A[Frontend: HTML / CSS / JS / Bootstrap] -->|HTTPS / REST API| B[Backend: Node.js + Express]
+    A[Frontend: HTML / CSS / JS / Bootstrap] -->|HTTPS / REST API| B[Backend: PHP]
     B --> C[(Databaza: MySQL)]
 ```
 
