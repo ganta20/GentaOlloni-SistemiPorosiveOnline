@@ -1,110 +1,274 @@
-# GentaOlloni-SistemiPorosiveOnline
+\# Sistemi për Menaxhimin e Porosive Online
 
-Tema: Sistemi për Menaxhimin e Porosive Online (E-Commerce)
 
-## Raporti 1
 
-Ideja është të bëhet një sistem për menaxhimin e porosive online, në mënyrë që klientët të shohin produktet dhe të bëjnë porosi më lehtë, ndërsa administratori t'i menaxhojë produktet dhe porositë në një vend të vetëm, pa gabime dhe pa porosi të humbura.
+\*\*Projekti:\*\* GentaOlloni-SistemiPorosiveOnline  
 
-## Kërkesat
+\*\*Lënda:\*\* Praktikë Profesionale  
 
-Kërkesat për këtë sistem janë:
+\*\*Tema:\*\* Sistemi për Menaxhimin e Porosive Online (E-Commerce)
 
-- sistemi duhet të lejojë qasjen e klientëve dhe të administratorit
 
-- klienti mund të regjistrohet dhe të hyjë me email dhe fjalëkalim
 
-- klienti mund t'i shohë produktet dhe t'i kërkojë ose filtrojë sipas kategorisë dhe çmimit
+\## 1. Përshkrimi i projektit
 
-- klienti mund të shohë detajet e produktit (përshkrimi, çmimi dhe sa copë ka në stok)
 
-- klienti mund të shtojë produkte në shportë, t'i heqë ato ose t'ia ndryshojë sasinë
 
-- klienti mund ta bëjë porosinë duke shkruar adresën e dërgesës, ku pagesa bëhet kur e merr porosinë
+Ky projekt synon zhvillimin e një sistemi për menaxhimin e porosive online. Sistemi mundëson shfaqjen dhe menaxhimin e produkteve, krijimin e porosive dhe administrimin e tyre.
 
-- klienti mund ta shohë historikun e porosive dhe në çfarë statusi janë
 
-- klienti mund ta anulojë porosinë vetëm derisa ajo nuk është konfirmuar ende nga admini
 
-- administratori mund të shtojë, ndryshojë dhe fshijë produkte dhe kategori
+Sistemi është i orientuar në dy role kryesore:
 
-- administratori mund t'i shohë të gjitha porositë dhe ta ndryshojë statusin e tyre (në pritje, konfirmuar, dërguar, dorëzuar ose anuluar)
+\- \*\*Klienti:\*\* mund të kyçet, të shikojë produktet dhe të realizojë porosi.
 
-- kur bëhet një porosi, stoku i produktit zvogëlohet vetë, dhe nëse nuk ka mjaftueshëm produkte porosia nuk pranohet
+\- \*\*Administratori:\*\* mund të menaxhojë produktet dhe porositë.
 
-...
 
-- në website duhet të konfirmohet regjistrimi, pra autentifikim
 
-- fjalëkalimet duhet të ruhen me hash (të fshehura, jo si tekst i lexueshëm)
+\## 2. Teknologjitë e përdorura
 
-- çdo përdorues, produkt dhe porosi duhet të ketë ID të veçantë
 
-- website duhet të jetë responsiv për çdo lloj ekrani
 
-- duhet të jetë i lehtë për t'u kuptuar dhe për t'u përdorur
+\- PHP – logjika e backend-it dhe API.
 
-- secili rol (klient ose administrator) duhet të bëjë vetëm funksionet e veta
+\- MySQL – ruajtja e të dhënave.
 
-## Teknikat/arkitektura
+\- XAMPP – serveri lokal Apache dhe MySQL.
 
-frontend
+\- PDO – komunikimi me databazën.
 
-HTML, CSS, JavaScript, Bootstrap
+\- Postman – testimi i endpoint-eve të API-së.
 
-faqet e klientit dhe të administratorit, dizajn responsiv
+\- Git dhe GitHub – menaxhimi i versioneve të projektit.
 
-backend
 
-PHP (me XAMPP): hyrja dhe regjistrimi, rolet, produktet, shporta dhe porositë
 
-database
+\## 3. Struktura e projektit
 
-MySQL: përdoruesit, produktet, kategoritë, shporta, porositë dhe pagesat
 
-Modeli fillestar i databazës:
 
-| Tabela | Për çfarë shërben |
-|---|---|
-| users | Llogaritë, email-i, password hash dhe roli (klient ose administrator) |
-| addresses | Adresat e dërgesës të klientit |
-| categories | Kategoritë e produkteve |
-| products | Produktet me çmim, stok dhe kategori |
-| cart_items | Produktet që klienti i ka në shportë |
-| orders | Porositë me klientin, adresën, statusin dhe totalin |
-| order_items | Produktet brenda një porosie, me sasinë dhe çmimin |
-| payments | Pagesa e secilës porosi |
+```text
 
-Lidhjet kryesore midis tabelave:
+porosi/
 
-- një përdorues mund të ketë shumë porosi
-- një kategori ka shumë produkte
-- një porosi ka shumë produkte brenda (tabela order_items)
-- një porosi ka një pagesë
+├── backend/
 
-arkitektura
+│   ├── api/
 
-sistemi ndahet në tri pjesë: frontend (çfarë e shohin përdoruesit), backend (PHP, që i përpunon kërkesat) dhe database (MySQL, ku ruhen të dhënat)
+│   │   ├── auth.php
 
-Modulet: përdoruesit, produktet, shporta, porositë, pagesat, administrimi
+│   │   ├── index.php
 
-## Plan pune
+│   │   ├── orders.php
 
-sugjerimi: kërkesat -> dizajnimi -> implementimi -> testimi
+│   │   ├── products.php
 
-| Faza | Aktivitetet kryesore | Rezultati i pritshëm |
+│   │   └── .htaccess
+
+│   ├── config/
+
+│   │   └── db.php
+
+│   ├── helpers/
+
+│   │   ├── auth.php
+
+│   │   └── response.php
+
+│   └── database.sql
+
+├── docs/
+
+│   ├── arkitektura.png
+
+│   ├── ERdiagrami.drawio.png
+
+│   └── testimi-api.md
+
+├── frontend/
+
+├── README.md
+
+└── Raporti\_Teknik\_1.docx
+
+```
+
+
+
+\## 4. Databaza
+
+
+
+Emri i databazës është `porosi\_online`.
+
+
+
+Databaza përmban tabelat kryesore:
+
+\- `users` – përdoruesit dhe rolet.
+
+\- `addresses` – adresat e dërgesës.
+
+\- `categories` – kategoritë e produkteve.
+
+\- `products` – produktet, çmimet dhe stoku.
+
+\- `cart\_items` – artikujt në shportë.
+
+\- `orders` – porositë.
+
+\- `order\_items` – produktet brenda porosive.
+
+\- `payments` – informacionet e pagesave.
+
+
+
+Lidhja me databazën realizohet përmes PDO në `backend/config/db.php`.
+
+
+
+\## 5. Funksionalitetet e backend-it
+
+
+
+Backend-i përmban API për:
+
+
+
+\- Autentikimin dhe menaxhimin e sesionit.
+
+\- Shfaqjen e produkteve.
+
+\- Krijimin, përditësimin dhe fshirjen e produkteve.
+
+\- Kontrollin e autorizimit sipas rolit.
+
+\- Shfaqjen dhe krijimin e porosive.
+
+\- Përditësimin e statusit të porosive.
+
+\- Kontrollin e stokut gjatë krijimit të porosisë.
+
+
+
+\## 6. Endpoint-et e API-së
+
+
+
+Adresa bazë:
+
+
+
+`http://localhost/porosi/backend/api`
+
+
+
+| Metoda | Endpoint | Përshkrimi |
+
 |---|---|---|
-| Analiza e kërkesave | Përcaktimi i funksioneve dhe roleve të sistemit | Lista e kërkesave |
-| Dizajnimi | Arkitektura dhe modeli i databazës | Dizajni i sistemit |
-| Krijimi i databazës | Krijimi i tabelave dhe lidhjeve në MySQL | Databaza e gatshme |
-| Backend-i | Hyrja, regjistrimi, produktet, shporta dhe porositë në PHP | Pjesa e serverit funksionale |
-| Frontend-i | Faqet për klientin dhe administratorin | Ndërfaqe responsive |
-| Testimi | Provimi i funksioneve dhe rregullimi i gabimeve | Version i testuar |
 
-Orari i propozuar
+| POST | `/auth/login` | Kyçja e përdoruesit |
 
-Java 1: analiza e kërkesave, dizajni dhe databaza
-Java 2-3: backend-i (hyrja, produktet, shporta, porositë)
-Java 4-5: frontend-i dhe lidhja me backend-in
-Java 6-7: testimi dhe rregullimi i gabimeve
-Java 8: finalizimi
+| POST | `/auth/logout` | Dalja nga sistemi |
+
+| GET | `/products` | Lista e produkteve |
+
+| GET | `/products/{id}` | Detajet e produktit |
+
+| POST | `/products` | Krijimi i produktit |
+
+| PATCH | `/products/{id}` | Përditësimi i produktit |
+
+| DELETE | `/products/{id}` | Fshirja e produktit |
+
+| GET | `/orders` | Lista e porosive |
+
+| POST | `/orders` | Krijimi i porosisë |
+
+| PATCH | `/orders/{id}` | Përditësimi i statusit të porosisë |
+
+
+
+\## 7. Instalimi dhe ekzekutimi
+
+
+
+1\. Instalo XAMPP.
+
+2\. Kopjo projektin në folderin `C:\\xampp\\htdocs\\porosi`.
+
+3\. Hap XAMPP Control Panel.
+
+4\. Aktivizo Apache dhe MySQL.
+
+5\. Hape phpMyAdmin në `http://localhost/phpmyadmin`.
+
+6\. Importo databazën nga `backend/database.sql`.
+
+7\. Kontrollo konfigurimin në `backend/config/db.php`.
+
+8\. Hape API-në në:
+
+
+
+`http://localhost/porosi/backend/api/products`
+
+
+
+\*\*Kujdes:\*\* Skedari `database.sql` e fshin dhe e krijon përsëri databazën `porosi\_online`. Importimi mund t'i fshijë të dhënat ekzistuese. Përdore vetëm kur dëshiron instalim të ri ose pasi të kesh bërë kopje rezervë.
+
+
+
+\## 8. Testimi
+
+
+
+API është testuar përmes Postman.
+
+
+
+Testet përfshijnë:
+
+\- Kyçjen me kredenciale të sakta dhe të pasakta.
+
+\- Kontrollin e autorizimit për klient dhe administrator.
+
+\- Operacionet CRUD për produkte.
+
+\- Krijimin dhe menaxhimin e porosive.
+
+\- Kontrollin e stokut.
+
+\- Trajtimin e gabimeve dhe kërkesave të pavlefshme.
+
+
+
+Rezultatet e testeve gjenden në `docs/testimi-api.md`.
+
+
+
+\## 9. Dokumentimi
+
+
+
+Në folderin `docs` gjenden:
+
+\- `arkitektura.png` – diagrami i arkitekturës.
+
+\- `ERdiagrami.drawio.png` – diagrami i databazës.
+
+\- `testimi-api.md` – rezultatet e testimit të API-së.
+
+
+
+\## 10. Gjendja e projektit
+
+
+
+Backend-i dhe API-ja për funksionalitetet e testuara janë implementuar dhe testuar. Frontend-i mbetet për t'u zhvilluar ose plotësuar në fazën përkatëse të projektit.
+
+
+
+
+
