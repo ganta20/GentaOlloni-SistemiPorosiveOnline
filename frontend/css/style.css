@@ -1,0 +1,50 @@
+
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    color: #212529;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.hero {
+    background: linear-gradient(135deg, #212529, #495057);
+    color: white;
+    padding: 80px 20px !important;
+}
+
+.hero h1 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+main h2 {
+    font-weight: bold;
+    color: #212529;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    height: 100%;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.product-card h5 {
+    font-weight: bold;
+}
+
+.product-price {
+    color: #198754;
+    font-size: 20px;
+    font-weight: bold;
+}
