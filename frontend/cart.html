@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shporta - Porosi Online</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Porosi Online</a>
+            <a href="index.html" class="btn btn-outline-light">Vazhdo blerjen</a>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <h2 class="mb-4">Shporta ime</h2>
+
+        <div id="cart-container"></div>
+
+        <div class="mt-4">
+            <h4>Totali: <span id="cart-total">0.00 €</span></h4>
+            <button id="clear-cart" class="btn btn-danger mt-2">
+                Zbraz shportën
+            </button>
+        </div>
+    </main>
+
+    <script src="js/pages/cart.js"></script>
+</body>
+</html>

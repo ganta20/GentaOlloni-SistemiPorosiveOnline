@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyçu - Porosi Online</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Porosi Online</a>
+            <a href="index.html" class="btn btn-outline-light">Ballina</a>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="product-card">
+                    <h2 class="text-center mb-4">Kyçu në llogarinë tënde</h2>
+
+                    <form id="login-form">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                class="form-control"
+                                placeholder="Shkruaj email-in"
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Fjalëkalimi</label>
+                            <input
+                                type="password"
+                                id="password"
+                                class="form-control"
+                                placeholder="Shkruaj fjalëkalimin"
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" id="login-button"
+                                class="btn btn-success w-100">
+                            Kyçu
+                        </button>
+
+                        <div id="login-message" class="mt-3"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/services/api.js"></script>
+    <script src="js/pages/login.js"></script>
+</body>
+</html>

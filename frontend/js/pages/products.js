@@ -38,7 +38,15 @@ async function loadProducts() {
             const stock = document.createElement("p");
             stock.textContent = "Stoku: " + product.stock;
 
-            card.append(name, description, price, stock);
+            const button = document.createElement("button");
+button.className = "btn btn-success w-100";
+button.textContent = "Shto në shportë";
+
+button.addEventListener("click", () => {
+    addToCart(product);
+});
+
+card.append(name, description, price, stock, button);
             column.appendChild(card);
             container.appendChild(column);
         });
